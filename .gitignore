@@ -1,0 +1,21 @@
+# Configuración local (datos de tus dispositivos)
+config.local.*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+
+# PlatformIO / Arduino
+.pio/
+.vscode/
+
+# Sistema
+Thumbs.db
+.DS_Store
+
+# Diagnóstico
+debug.log

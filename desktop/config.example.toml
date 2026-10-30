@@ -1,0 +1,13 @@
+# Puerto serie: "auto" busca CP210x (VID 10C4) o CH340 (VID 1A86).
+port = "auto"
+# Borde del escritorio virtual junto al iPhone: right, left, top o bottom.
+edge = "right"
+# Tamaño estimado de pantalla del iPhone en cuentas HID.
+phone_width = 400
+phone_height = 870
+# Multiplicador aplicado a los deltas enviados al iPhone.
+speed = 1.0
+# Sobrepaso necesario hacia el borde que da a la PC para volver.
+return_overshoot = 40
+# Atajo para alternar el control; también fuerza el retorno a Windows.
+hotkey = "ctrl+alt+space"
