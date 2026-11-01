@@ -136,14 +136,14 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, LOW);
   Serial.begin(921600);
-  NimBLEDevice::init("EdgeHop");
+  NimBLEDevice::init("Interfaz Windows-iPhone");
   NimBLEDevice::setSecurityAuth(true, false, true);
   NimBLEDevice::setSecurityIOCap(BLE_HS_IO_NO_INPUT_OUTPUT);
 
   NimBLEServer *server = NimBLEDevice::createServer();
   server->setCallbacks(new ServerCallbacks());
   hid = new NimBLEHIDDevice(server);
-  hid->manufacturer()->setValue("EdgeHop");
+  hid->manufacturer()->setValue("Interfaz Windows-iPhone");
   hid->pnp(0x02, 0x303A, 0x1001, 0x0100);
   hid->hidInfo(0x00, 0x01);
   hid->setBatteryLevel(100);

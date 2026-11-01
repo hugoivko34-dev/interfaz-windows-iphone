@@ -1,4 +1,4 @@
-"""Windows desktop client for passing input to an EdgeHop iPhone link."""
+"""Windows desktop client for passing input to an iPhone through the ESP32 bridge."""
 import atexit
 import ctypes
 import sys
@@ -7,11 +7,12 @@ import time
 import tomllib
 from pathlib import Path
 
+import clipboard
 from hid_keymap import CONSUMER_VK, MODIFIER_VK, SCAN_TO_HID
 from link import CONSUMER, KEYS, MOUSE, RELEASE_ALL, SerialLink, find_port
 
 if sys.platform != "win32":
-    raise SystemExit("EdgeHop requiere Windows 10.")
+    raise SystemExit("Interfaz Windows-iPhone requiere Windows 10.")
 
 user32 = ctypes.WinDLL("user32", use_last_error=True)
 kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
@@ -101,7 +102,7 @@ def load_config():
     config.setdefault("phone_height", 870)
     config.setdefault("speed", 1.0)
     config.setdefault("return_overshoot", 40)
-    config.setdefault("hotkey", "ctrl+alt+space")
+    config.setdefault("clipboard_port", 8765)
     if config["edge"] not in ("right", "left", "top", "bottom"):
         raise ValueError("edge debe ser right, left, top o bottom")
     return config
@@ -150,6 +151,8 @@ class App:
         if not port:
             raise RuntimeError("No se detectó CP210x/CH340; indique el puerto en config.local.toml")
         print(f"Puerto encontrado: {port}", flush=True)
+        if self.cfg["clipboard_port"]:
+            clipboard.start(self.cfg["clipboard_port"])
         self.link = SerialLink(port, self.status, self.error)
         # A board that was just plugged in sometimes sits hung until reset; if it
         # doesn't answer the startup PING, reboot it through the EN line.

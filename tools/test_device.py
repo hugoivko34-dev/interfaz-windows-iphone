@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exercise an EdgeHop device over its serial protocol."""
+"""Exercise an Interfaz Windows-iPhone board over its serial protocol."""
 import argparse
 import struct
 import sys
@@ -61,7 +61,7 @@ def read_frames(port, timeout):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Prueba serial de EdgeHop")
+    parser = argparse.ArgumentParser(description="Prueba serial de Interfaz Windows-iPhone")
     parser.add_argument("--port", help="Puerto serie (fallback si no se detecta CP210x/CH340)")
     args = parser.parse_args()
     port_name = find_port(args.port)
@@ -84,9 +84,9 @@ def main():
                 if connected:
                     print("iPhone conectado.")
                     break
-                print("iPhone no conectado. Empareje «EdgeHop» en Ajustes > Bluetooth del iPhone.")
+                print("iPhone no conectado. Empareje «Interfaz Windows-iPhone» en Ajustes > Bluetooth del iPhone.")
         if not connected:
-            print("Tiempo agotado. Empareje «EdgeHop» en Ajustes > Bluetooth del iPhone y vuelva a intentar.")
+            print("Tiempo agotado. Empareje «Interfaz Windows-iPhone» en Ajustes > Bluetooth del iPhone y vuelva a intentar.")
             return 1
 
         print("Moviendo el puntero en un cuadrado...")
@@ -96,10 +96,11 @@ def main():
                 device.write(frame(MOUSE, struct.pack("<hhbB", dx, dy, 0, 0)))
                 time.sleep(0.025)
 
-        print("Escribiendo: hola edgehop")
+        print("Escribiendo: hola interfaz")
         keycodes = {"h": 0x0B, "o": 0x12, "l": 0x0F, "a": 0x04,
-                    "e": 0x08, "d": 0x07, "g": 0x0A, "p": 0x13, " ": 0x2C}
-        for character in "hola edgehop":
+                    "i": 0x0C, "n": 0x11, "t": 0x17, "e": 0x08, "r": 0x15,
+                    "f": 0x09, "z": 0x1D, " ": 0x2C}
+        for character in "hola interfaz":
             report = bytes((0, keycodes[character], 0, 0, 0, 0, 0))
             device.write(frame(KEYS, report))
             time.sleep(0.06)

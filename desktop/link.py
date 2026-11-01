@@ -1,4 +1,4 @@
-"""Serial framing and nonblocking input queue for EdgeHop."""
+"""Serial framing and nonblocking input queue for Interfaz Windows-iPhone."""
 import queue
 import struct
 import threading

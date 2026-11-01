@@ -9,5 +9,5 @@ phone_height = 870
 speed = 1.0
 # Sobrepaso necesario hacia el borde que da a la PC para volver.
 return_overshoot = 40
-# Atajo para alternar el control; también fuerza el retorno a Windows.
-hotkey = "ctrl+alt+space"
+# Puerto de red para compartir el portapapeles con el iPhone (0 = desactivado).
+clipboard_port = 8765

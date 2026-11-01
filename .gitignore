@@ -19,3 +19,6 @@ Thumbs.db
 
 # Diagnóstico
 debug.log
+
+# Clave del portapapeles
+clip_token.txt
